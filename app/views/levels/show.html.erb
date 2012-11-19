@@ -1,0 +1,62 @@
+<ul id="navigation">
+	<li class="nav"><%= link_to @level.container.name, @level.container, :class => "button navbutton" %></li>
+	<% @level.compartments.each do |compartment| %>
+    <li class="nav"><%= link_to compartment.name, level_compartment_path(@level, compartment), :class => "button navbutton" %></li>
+<% end %>
+</ul>
+		
+<ul id="action">
+	<li><%= link_to 'new compartment', new_level_compartment_path(@level),  :class => 'button new' %></li>
+	<li><%= link_to 'new item', new_level_item_path(@itemable),  :class => 'button new' %></li>
+</ul>
+<%#= render 'items/item' %>
+	
+<% previous_category = nil %>
+
+<h1><%=h @level.container.name %> <%=h @level.name %></h1>
+
+<% if @items.count > 0 %>
+<div id="totals">
+<table>
+<% if !@items.nil? %>
+	<% @items.each do |item| %>
+	<% if previous_category == nil || previous_category != item.category %>
+	<tr>
+		<td colspan="2" class="hold"><%= item.category.name %></td>
+	</tr>
+	    <% previous_category = item.category %>
+	<% end %>
+	<tr>
+    <td><%= link_to item.name, polymorphic_path([@itemable, item]), :class => 'whatever' %> <% if item.quantity > 1 %>(<%= item.quantity %>)<% end %></td>
+    <!--td><%#=h ((item.category.nil?) ? "N/A" : item.category.name) %></td-->
+	<td class="hold2">
+	<% if !item.value.nil? %><%= Item.human_attribute_name(:value) %><% end %><%=h ((item.value.nil?) ? "N/A" : number_with_precision(item.value * item.quantity, :precision => 2, :separator => '.', :delimiter => ',')) %>
+	</td>
+  </tr>
+	<% end %>
+<% end %>
+
+
+	<% x = 0 %>
+	<% @category_items.each do |k, v| %>  
+	<tr>
+		<td class="hold3"><%= "#{k} " %></td>
+		<td class="hold4"><%= Item.human_attribute_name(:value) %><%= number_with_precision("#{v}", :precision => 2, :separator => '.', :delimiter => ',') %></td>
+	</tr>
+	<% x = x + "#{v}".to_f %>
+	<% end %>
+	
+	<tr>
+		<td class="hold5">Total</td>
+		<td class="hold6"><%= Item.human_attribute_name(:value) %><%= number_with_precision(x, :precision => 2, :separator => '.', :delimiter => ',') %></td>
+	</tr>
+	</table>
+</div>
+<% end %>
+
+<ul id="function">		
+	<li><%= link_to 'Delete ' + @level.name, container_level_path(@container), :confirm => 'Delete ' + @level.name + '?', :method => :delete, :class => 'button floatright delete' %></li>
+	<li><%= link_to 'Edit ' + @level.name, edit_container_level_path(@container, @level), :class => 'button floatright edit' %></li>	
+	<%#= link_to @level.name + ' pdf', edit_container_path(@container), :class => 'button floatright edit' %>
+</ul>
+

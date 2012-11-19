@@ -1,0 +1,183 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require gritter
+ *= require media
+ */
+* {padding:0;margin:0}
+
+html,input,h2,h1,select {font-family: 'Doppio One', "Helvetica Neue", Helvetica, Arial, sans-serif;color:rgba(255,255,255,0.5);font-weight:400;text-transform:lowercase}
+
+body {min-height:1000px;background:-webkit-radial-gradient(rgba(255,255,255,0.3) 10%,rgba(49,71,89,0.8) 96%), url(bg.png) repeat;margin:0;padding:0;border-top:4px solid rgba(0, 0, 0, 0.5)}
+
+
+h2#logo {background:transparent url(invebox.png)no-repeat;opacity:0.8;height:105px;width:236px;padding:0;margin:0}
+
+h1#header {margin:30px 45px 15px}
+
+ul {list-style:none;width:925px}
+a {cursor:pointer}
+
+#wrapper h2 {float:left}
+#wrapper h3 {clear:left}
+
+/* end universal */
+
+table {font-size:1.2em;border-collapse:collapse;width:100%}
+table td {border-bottom:1px solid gray}
+td {font-size:1.2em;padding:10px}
+td.hold {border-radius:10px}
+td.hold2 {text-align:right}
+td.hold3 {background:rgba(0,0,0,0.6)}
+td.hold4 {background:rgba(0,0,0,0.6);text-align:right}
+td.hold5 {background:rgba(0,0,0,0.6);border-bottom-left-radius:10px;color:#e4e4e4;border-bottom:0}
+td.hold6 {background:rgba(0,0,0,0.6);border-bottom-right-radius:10px;
+		  color:#e4e4e4;text-align:right;border-bottom:0}
+
+div#totals {border:2px solid gray;clear:both;margin:0 45px;border-radius:10px;background:rgba(0,0,0,0.3)}
+
+	select#item_category_id {font-size:1em;padding:0.5em 1em;background:#000;color:#fff;border:2px solid rgba(255,255,255,1);-webkit-appearance:none}
+
+span#create {margin:0 3px}
+
+body #content .navbutton{color:#1B9EE0;border:2px solid #1B9EE0;}
+
+ul#item_navigation {width:880px;float:left;padding:40px 10px 25px 35px;margin:0 auto}
+ul#item_navigation li#title {float:left;padding:0;margin:0}
+ul#item_navigation li.nav {float:right;padding:0;margin:0}
+ul#navigation {width:880px;float:left;padding:17px 0 0 45px;}
+ul#action {float:left;padding:25px 20px 30px 0}
+ul#function {float:left;padding:15px 0 25px}
+
+#navigation li, #action li, #function li {float:right;margin:10px}
+#navigation li {margin-top:33px}
+
+@-webkit-keyframes glow {0% {
+			box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.25);}
+						100% {
+			box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.75);border:2px solid #fff;}
+							}
+			
+@-webkit-keyframes glowf {0% { box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.5);border:2px solid #fff;}
+						100% {  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0);  }}
+
+#login {margin:-1px 25px 0;padding:0;width:32px;position:absolute;z-index:1000;right:0}
+
+
+#sstatus {/*position: absolute;*/   /* Panel will overlap  content */
+	    position: relative;   /*Panel will "push" the content down */
+	    top: 0;width: 100%;z-index: 999;text-align: center;margin-left: auto;margin-right: auto;}
+
+#status {background: rgba(0, 0, 0, 0.5);overflow: hidden;padding:10px 0;position: relative;z-index: 3;
+		display: none;}
+	
+a {text-decoration:none;color:#1B9EE0}
+#status a, #content a.static {color:#099bc8;}
+#status a:hover, #content a.static:hover {color:#35b2d8}
+#status p {color:#0d7291;float:right;margin:0 0.5em 0.5em;}
+#status {border-bottom:1px solid #666;padding-bottom:0.5em}
+#content .button {color:#fff;font-size:1.5em}
+
+h1 {margin:0 0 10px 45px;text-shadow: 1px 1px 2px #222;}
+#title h1 {margin:2px 0 0 10px;text-shadow: 1px 1px 2px #222;}
+
+a.last_cur {margin-right:2em}
+#content a.new {background:rgba(0,0,0,0.5);border:2px solid #1B9EE0}
+
+h2 {font-size:1.5em;font-weight:normal;text-shadow: 1px 1px 2px #888;padding:0 3px;color:#2b3341}
+label {font-size:1.1em;text-shadow: 1px 1px 2px #888;padding:3px;color:#2b3341}
+#content label {font-size:1.1em;padding:3px;color:#999;text-shadow:none}
+
+div.signin {border-top:1px solid #596B77;padding-top:0.5em}
+
+div.email {margin-top:1em}
+
+#footer_copy {color:#2b3341;text-shadow:0;margin-bottom:30px}
+
+#copyright {color:#2b3341}
+
+#footer_copy a:hover {color:#63c7fa}
+
+#home #toggle {margin:0;padding:0;width:32px}
+
+#toggle a.open {background:black url(Profiles.png) no-repeat;border-left:2px solid #000;border-right:2px solid #000;border-bottom:2px solid #000;width:32px;height:32px;display:block;border-bottom-right-radius:5px;border-bottom-left-radius:5px;box-shadow: 1px 1px 3px #222;opacity:0.5}
+
+
+input[type='email'], input[type="password"],input[type="text"],textarea
+{border-radius:5px;font-size:1.3em;padding:0.3em;color:#e4e4e4;background:rgba(0,0,0,0.5);border:2px solid #333;margin-bottom:0.75em}
+
+
+input[type='submit'] {border-radius:8px;font-size:1.3em;padding:10px 30px;color:#fff;background:rgba(0,0,0,0.5);border:2px solid #1B9EE0;margin:1em 0 1em 0.1em;cursor:pointer;-webkit-appearance:none}
+
+a.button {border-radius:8px;padding:10px 30px;border:2px solid #999;margin:0}
+
+input[type="checkbox"]
+{margin:1em 0.2em 1.5em}
+
+.forgot {margin:0 45px 10px}
+.forgot a {display:block;margin:0.5em 0}
+
+
+
+#content form {clear:both;margin-left:45px}
+
+a.nav {color:white;font-size:1.5em;float:right;margin:0 20px}
+
+.button {-webkit-animation-name: glowf;
+-webkit-animation-duration: 2s;
+-webkit-animation-iteration-count: 1;
+-webkit-animation-direction: alternate;
+-webkit-animation-timing-function: ease-in-out;}
+
+.button:hover {-webkit-animation-name: glow;
+-webkit-animation-duration: 2s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-direction: alternate;
+-webkit-animation-timing-function: ease-in-out;}
+
+
+textarea { resize:vertical; }
+
+textarea.desc {width:580px;height:200px}
+
+div#contain {border:1px solid red;margin:0 auto;width:600px;margin:0 auto;background:rgba(0,0,0,0.2);border-radius:10px;padding:20px 20px}
+
+#welcome .sign_up {display:inline-block;margin:0.4em 0;font-size:1.3em;color:#fff;border-radius:8px;padding:10px 30px;padding:10px 30px;color:#fff;background:rgba(0,0,0,0.5);border:2px solid #1B9EE0;margin:1em 0 1em 0.1em;cursor:pointer}
+
+#home #welcome .sign_up {margin:1.5em 0}
+
+	
+	h3 {font-weight:normal;color:#2b3341;font-size:1.5em;margin:1em 0 1.5em}
+	
+	h3, #home h3, #welcome h4 {font-size:1.5em;font-weight:normal;color:#2b3341;border-top:1px solid #596b77;padding:0.1em 0 0;text-shadow: 0px 1px 1px #777;margin:1.5em 0 0}
+	
+	#home h3 {border:0;margin:0}
+	
+	#welcome p {padding:0;margin:0 0 1em;color:#2b3341;text-shadow: 0px 1px 1px #777;}
+	
+	#wrapper #welcome a {text-shadow:0}
+	
+	.footerlinks {margin:0 1em 0 0}
+
+		
+div#container_detail {background:rgba(0,0,0,0.5);float:left;border-radius:20px}
+
+.floatright {float:right}
+.floatleft {float:left}
+	
+#gritter-notice-wrapper {opacity:0.75}
+	
+#gritter-notice-wrapper span, #gritter-notice-wrapper p {color:white;font-size:1.4em}
+
+#gritter-notice-wrapper span {padding-top:0.2em}
+
+#content a.delete {color:#db8b0c}	

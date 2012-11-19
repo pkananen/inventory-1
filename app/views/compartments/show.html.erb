@@ -1,0 +1,21 @@
+<ul id="navigation">
+	<%#= link_to @level.container.name, @level.container, :class => "button" %>
+	<li class="nav"><%= link_to @level.name, container_level_path(@container, @level), :class => "button navbutton" %></li>
+</ul>
+
+<ul id="action">
+	<li><%= link_to 'new item', new_compartment_item_path(@itemable),  :class => 'button new' %></li>
+	</ul>
+	
+<h1><%=h @level.container.name %> <%=h @level.name %> <%=h @compartment.name %></h1>
+	
+	<%= render 'items/item' %>
+	<%#= render 'items/form' %>
+	
+
+<ul id="function">	
+	<li><%= link_to 'Delete ' + @compartment.name, level_compartment_path(@compartment), :confirm => 'Delete ' + @compartment.name + '?', :method => :delete, :class => 'button floatright delete' %></li>
+	<li><%= link_to 'Edit ' + @compartment.name, edit_level_compartment_path(@level, @compartment), :class => 'button floatright edit' %></li>
+</ul>	
+
+	<%#= link_to @compartment.name + ' pdf', edit_compartment_path(@compartment), :class => 'button floatright edit' %>	

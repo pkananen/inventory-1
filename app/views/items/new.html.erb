@@ -1,0 +1,11 @@
+<% if @item.itemable_type == "Compartment" %><% navi = [@itemable.level, @itemable] %><% end %>
+<% if @item.itemable_type == "Level" %><% navi = [@itemable.container, @itemable] %><% end %>
+<% if @item.itemable_type == "Container" %><% navi = @itemable %><% end %>
+
+<ul id="item_navigation">
+<li class="nav"><%= link_to @itemable.name, polymorphic_path(navi), :class => 'button navbutton' %></li>
+<li id="title"><h1>new item for <%= @itemable.name %></h1></li>
+</ul>
+
+<%= render 'form' %>
+

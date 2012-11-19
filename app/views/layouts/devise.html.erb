@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<!-- Standard iPhone --> 
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/touch-icon-iphone-114.png" />
+	<!-- Retina iPhone --> 
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/touch-icon-iphone-114.png" />
+	<!-- Standard iPad --> 
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/touch-icon-ipad-144.png" />
+	<!-- Retina iPad --> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/touch-icon-ipad-144.png" />
+	<link rel="shortcut icon" type="image/png" href="/invebox.png" />
+	<!--link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'-->
+	<link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+	<!--link href='http://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'-->
+	<!--link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'-->
+	
+	<!-- Uncomment to make IE8 render like IE7 -->
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+	
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<script type="text/javascript">
+	        (function(document,navigator,standalone) {
+	            // prevents links from apps from oppening in mobile safari
+	            // this javascript must be the first script in your <head>
+	            if ((standalone in navigator) && navigator[standalone]) {
+	                var curnode, location=document.location, stop=/^(a|html)$/i;
+	                document.addEventListener('click', function(e) {
+	                    curnode=e.target;
+	                    while (!(stop).test(curnode.nodeName)) {
+	                        curnode=curnode.parentNode;
+	                    }
+	                    // Condidions to do this only on links to your own app
+	                    // if you want all links, use if('href' in curnode) instead.
+	                    if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) ) ) {
+	                        e.preventDefault();
+	                        location.href = curnode.href;
+	                    }
+	                },false);
+	            }
+	        })(document,window.navigator,'standalone');
+	    </script>
+	
+	<title><%= content_for?(:title) ? yield(:title) : "invebox" %></title>
+  
+	<!-- Included CSS Files -->
+	<%= stylesheet_link_tag    "application" %>
+	
+	<!-- Included JS Files  -->
+	<%= javascript_include_tag "application" %>
+	
+	
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="sstatus"><div id="status">
+		
+	  <p>	Currency:<% en = 'en'%>
+		<%= link_to "GBP", locales_path + ('?locale=en') %> |
+		<%= link_to "EUR", locales_path + ('?locale=fr') %> |
+		<%= link_to "USD", locales_path + ('?locale=us'), :class => 'last_cur' %>
+	<% if user_signed_in? %>
+	    <%= link_to "edit", edit_user_registration_path %> <%= current_user.email %>
+	    <%= link_to "sign out", destroy_user_session_path, :method => :delete %>
+	  <% else %>
+	    <%= link_to "sign up", new_user_registration_path %> | <%= link_to "sign in", new_user_session_path %>
+	  <% end %></p>
+	</div></div>
+	
+<div id="wrapper">
+	
+	
+	
+	<div id="login">
+		<p id="toggle">
+			<a class="open" href="#"></a>			
+		</p>
+	</div>
+	
+	<div id="alerts" style="float:left">
+		
+		<%= js add_gritter(flash[:notice], :image => :success, :time => 2000, :class_name => "success") %>
+  		<%= js add_gritter(flash[:alert], :image => :warning, :time => 2000, :class_name => "alert") %>
+	</div>
+	
+	<a href="/"><h2 id="logo"></h2></a>
+	<h3>keep track of just about anything</h3>
+	
+	<div id="welcome">
+  
+  <%= yield %>
+</div>
+</div>
+</body>
+</html>

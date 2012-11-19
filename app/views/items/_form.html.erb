@@ -1,0 +1,47 @@
+<%= form_for [@itemable, @item], :html => {:multipart => true} do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :autocomplete => :off %>
+  </div>
+
+
+    <%#= f.file_field :image %>
+
+
+<div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity, :value => '1', :autocomplete => :off %>
+  </div>
+	<div class="field">
+	    <%= f.label :value %><br />
+	    <%= f.text_field :value, :autocomplete => :off, :value => (number_with_precision(f.object.value, :precision => 2, :separator => '.', :delimiter => ',') || 0) %>
+	  </div>
+	
+	
+
+	
+<p>
+  <label for="item_category_id">Category</label><br />
+  <%= f.collection_select :category_id, current_user.categories, :id , :name %>
+  <span id="create">or create one</span>
+  <%= f.text_field :new_category_name, :autocomplete => :off %>
+</p>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

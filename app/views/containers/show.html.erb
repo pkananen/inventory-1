@@ -1,0 +1,63 @@
+<ul id="navigation">
+<li class="nav"><%= link_to 'Containers', containers_path, :class => 'button navbutton' %></li>
+<% @container.levels.each do |level| %>
+<li class="nav"><%= link_to @container.name + " " + level.name, container_level_path(@container, level), :class => "button navbutton" %></li>
+<% end %>
+</ul>
+
+<ul id="action">
+<li><%= link_to 'new level', new_container_level_path(@container),  :class => 'button new' %></li>
+<li><%= link_to 'new item', new_container_item_path(@itemable),  :class => 'button new' %></li>
+</ul>
+
+<% previous_category = nil %>
+
+<h1><%= @container.name %></h1>
+
+
+<% if @items.count > 0 %>
+<div id="totals">	
+<table>
+
+	<% @items.each do |item| %>
+		<% if previous_category == nil || previous_category != item.category %>
+		<tr>
+			<td colspan="2" class="hold"><%= item.category.name %></td>
+		</tr>
+    <% previous_category = item.category %>
+	<% end %>
+	<tr>
+		<td>
+		<%= link_to item.name, polymorphic_path([@itemable, item]), :class => 'whatever' %> <% if item.quantity > 1 %>(<%= item.quantity %>)<% end %>
+		</td>
+		<td class="hold2">
+		<% if !item.value.nil? %><%= Item.human_attribute_name(:value) %><% end %><%=h ((item.value.nil?) ? "N/A" : number_with_precision(item.value * item.quantity, :precision => 2, :separator => '.', :delimiter => ',')) %>
+		</td>
+	</tr>
+	<% end %>
+
+
+
+<%#=h ((item.category.nil?) ? "N/A" : item.category.name) %>
+	
+	<% x = 0 %>
+	<% @category_items.each do |k, v| %>  
+	<tr>
+		<td class="hold3"><%= "#{k} " %></td>
+		<td class="hold4"><%= Item.human_attribute_name(:value) %><%= number_with_precision("#{v}", :precision => 2, :separator => '.', :delimiter => ',') %></td>
+	</tr>
+	
+<% x = x + "#{v}".to_f %>
+<% end %>
+	
+	<tr><td class="hold5">Total</td><td class="hold6"><%= Item.human_attribute_name(:value) %><%= number_with_precision(x, :precision => 2, :separator => '.', :delimiter => ',') %></td></tr>
+	
+	</table>
+	</div>
+<% end %>
+
+<ul id="function">
+<li><%= link_to 'Delete ' + @container.name, @container, method: :delete, data: { confirm: 'Delete ' + @container.name + '?' },:class => 'button floatright delete'  %></li>
+<li><%= link_to 'Edit ' + @container.name, edit_container_path(@container), :class => 'button floatright edit' %></li>
+<!--li><= link_to @container.name + ' pdf', edit_container_path(@container), :class => 'button floatright edit' %></li-->
+</ul>

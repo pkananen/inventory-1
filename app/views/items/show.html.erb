@@ -1,0 +1,50 @@
+<% if @item.itemable_type == "Compartment" %><% navi = [@itemable.level, @itemable] %><% end %>
+<% if @item.itemable_type == "Level" %><% navi = [@itemable.container, @itemable] %><% end %>
+<% if @item.itemable_type == "Container" %><% navi = @itemable %><% end %>
+
+
+
+
+<ul id="item_navigation">
+<li class="nav"><%= link_to @itemable.name, polymorphic_path(navi), :class => 'button navbutton' %></li>
+<li id="title"><h1><%= @item.name %></h1></li>
+</ul>
+
+
+
+
+<div id="totals">
+<table>
+<% if !@item.description.nil? %>
+
+  <tr>
+	<td>Description</td><td><%= @item.description %></td>
+</tr>
+
+<% end %>
+
+<tr><td class="hold">Category</td><td class="hold2"><%= @item.category.name %></td></tr>
+  
+<%# if !@item.image_url.nil? %>
+<%#= image_tag @item.image_url.to_s %>
+<%# end %>
+
+<tr><td class="hold3">Quantity</td><td class="hold4"><%= @item.quantity %></td></tr>
+
+<tr><td class="hold3">Value</td><td class="hold4"><%= Item.human_attribute_name(:value) %><%= number_with_precision(@item.value, :precision => 2, :separator => '.', :delimiter => ',') %></td></tr>
+
+<tr><td class="hold5">Total Value</td>
+<% if !@item.value.nil? %>
+<% x = @item.value * @item.quantity %>
+<% end %>
+<td class="hold6"><%= Item.human_attribute_name(:value) %><%= number_with_precision(x, :precision => 2, :separator => '.', :delimiter => ',') %></td></tr>
+
+</table>
+</div>
+
+<ul id="function">
+<li><%= link_to 'Delete ' + @item.name, [@itemable, :item], :confirm => "Delete " + @item.name + "?", :method => :delete, :class => 'button floatright delete' %></li>
+<li><%= link_to 'Edit ' + @item.name, [:edit, @itemable, :item], :class => 'button floatright edit' %></li>
+</ul>
+
+

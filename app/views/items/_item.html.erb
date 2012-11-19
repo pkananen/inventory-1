@@ -1,0 +1,59 @@
+<% if @items.count > 0 %>
+<div id="totals">
+<table>
+<% previous_category = nil %>
+
+<% @items.each do |item| %>
+<% if previous_category == nil || previous_category != item.category %>
+	
+    <tr><td colspan="2" class="hold"><%= item.category.name %></td></tr>
+
+    <% previous_category = item.category %>
+  <% end %>
+
+  <tr>
+    <td><%= link_to item.name, polymorphic_path([@itemable, item]), :class => 'whatever' %> <% if item.quantity > 1 %>(<%= item.quantity %>)<% end %></td>
+    <!--td><%#=h ((item.category.nil?) ? "N/A" : item.category.name) %></td-->
+	<td class="hold2">
+	<% if !item.value.nil? %><%= Item.human_attribute_name(:value) %><% end %><%=h ((item.value.nil?) ? "N/A" : number_with_precision(item.value * item.quantity, :precision => 2, :separator => '.', :delimiter => ',')) %>
+	</td>
+
+    <!--td><%#= link_to 'Edit', edit_polymorphic_path([@itemable, item]), :class => 'whatever' %></td-->
+
+  </tr>
+
+<% end %>
+
+
+
+<% end %>
+
+<% if @items.count > 0 %>
+<% @category_items.each do |k, v| %>  
+<tr><td class="hold3"><%= "#{k} " %></td>
+<td class="hold4"><%= Item.human_attribute_name(:value) %><%= number_with_precision("#{v}", :precision => 2, :separator => '.', :delimiter => ',') %></td></tr>
+<% end %><% end %>
+
+<% if @items.count > 0 %>
+<tr><td class="hold5">Total</td>
+<td class="hold6"><%= Item.human_attribute_name(:value) %><%= number_with_precision(@items.sum("quantity * value"), :precision => 2, :separator => '.', :delimiter => ',') %></td></tr>
+
+
+</table>
+</div>
+<% end %>
+
+
+<!-- FILTER STUFF -->
+<%#= t "currency" %>
+<%#= form_tag( '', :method => :get ) do %>
+      <%# @options = Category.all.map { |a| [ a.name, a.id ] } %>
+      <%#= select_tag "category_id", options_for_select((@options), params[:_id]), :onchange => "this.form.submit();", :include_blank => true %> 
+    <%# end %>
+<%#= link_to 'Remove Filter', level_compartment_path(@level, @compartment), :class => "button floatright navbutton" %>
+<!-- FILTER STUFF OFF -->
+
+
+<%#= f.text_field :cost, :class => 'cost', :value => (number_with_precision(f.object.cost, :precision => 2) || 0) %>
+<%#= number_with_precision(1.5, :precision => 2) %>
+		

@@ -1,0 +1,8 @@
+<ul id="item_navigation">
+<li class="nav"><%= link_to @item.name, polymorphic_path([@itemable, :item]), :class => 'button navbutton' %></li>	
+<li id="title"><h1>edit <%= @itemable.name %> <%= @item.name %></h1></li>
+
+</ul>
+
+<%= render 'form' %>
+

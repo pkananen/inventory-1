@@ -1,0 +1,15 @@
+<%= form_for([@compartment.level, @compartment]) do |f| %>
+    
+ <div class="field">
+         <%= f.label :name %><br />
+         <%= f.text_field :name, :autocomplete => :off %>
+</div>
+
+
+  <div class="actions">
+    <%= f.submit 'Submit', :class => "submit" %>
+  </div>
+
+ 
+
+    <% end %>

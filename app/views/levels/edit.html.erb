@@ -1,0 +1,6 @@
+<ul id="item_navigation">
+<li class="nav"><%= link_to @level.name, container_level_path(@container), :class => 'button navbutton' %></li>	
+<li id="title"><h1>edit <%= @level.container.name %> <%=@level.name %></h1></li>
+</ul>
+
+<%= render 'form' %>

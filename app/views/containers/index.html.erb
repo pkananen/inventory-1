@@ -1,0 +1,20 @@
+
+
+<ul id="navigation">
+<% @containers.each do |container| %>
+			<li class="nav">
+				<%= link_to container.name, container, :class => "button navbutton" %>
+			</li>
+		<% end %>
+</ul>
+
+
+	
+<ul id="action">
+	<li><%= link_to 'new container', new_container_path,  :class => 'button new' %></li>
+</ul>
+	
+	
+<%#= link_to 'Show', container %>
+<%#= link_to 'Edit', edit_container_path(container) %>
+<%#= link_to 'Destroy', container, method: :delete, data: { confirm: 'Are you sure?' } %>

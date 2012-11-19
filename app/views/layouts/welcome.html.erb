@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<!-- Standard iPhone --> 
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/touch-icon-iphone-114.png" />
+	<!-- Retina iPhone --> 
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/touch-icon-iphone-114.png" />
+	<!-- Standard iPad --> 
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/touch-icon-ipad-144.png" />
+	<!-- Retina iPad --> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/touch-icon-ipad-144.png" />
+	<link rel="shortcut icon" type="image/png" href="/invebox.png" />
+	<link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<script type="text/javascript">
+	        (function(document,navigator,standalone) {
+	            if ((standalone in navigator) && navigator[standalone]) {
+	                var curnode, location=document.location, stop=/^(a|html)$/i;
+	                document.addEventListener('click', function(e) {
+	                    curnode=e.target;
+	                    while (!(stop).test(curnode.nodeName)) {
+	                        curnode=curnode.parentNode;
+	                    }
+	                    
+	                    if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) ) ) {
+	                        e.preventDefault();
+	                        location.href = curnode.href;
+	                    }
+	                },false);
+	            }
+	        })(document,window.navigator,'standalone');
+	    </script>
+	
+	<title><%= content_for?(:title) ? yield(:title) : "invebox" %></title>
+  
+	<!-- Included CSS Files -->
+	<%= stylesheet_link_tag    "application" %>
+	
+	<!-- Included JS Files  -->
+	<%= javascript_include_tag "application" %>
+	
+	
+  
+  <%= csrf_meta_tags %>
+</head>
+<body id="home">
+	<div id="sstatus"><div id="status">
+		
+	  <p>	Currency:<% en = 'en'%>
+		<%= link_to "GBP", locales_path + ('?locale=en') %> |
+		<%= link_to "EUR", locales_path + ('?locale=fr') %> |
+		<%= link_to "USD", locales_path + ('?locale=us'), :class => 'last_cur' %>
+	<% if user_signed_in? %>
+	    <%= current_user.email %>
+	    <%= link_to "sign out", destroy_user_session_path, :method => :delete %>
+	  <% else %>
+	    <%= link_to "sign up", new_user_registration_path %> | <%= link_to "sign in", new_user_session_path %>
+	  <% end %></p>
+	</div></div>
+	
+<div id="wrapper">
+	
+	
+	
+	<div id="login">
+		<p id="toggle">
+			<a class="open" href="#"></a>			
+		</p>
+	</div>
+	
+	<div id="alerts" style="float:left">
+		
+		<%= js add_gritter(flash[:notice], :image => :success, :time => 2000, :class_name => "success") %>
+  		<%= js add_gritter(flash[:alert], :image => :warning, :time => 2000, :class_name => "alert") %>
+	</div>
+	
+	<a href="/"><h2 id="logo"></h2></a>
+	<h3>keep track of just about anything</h3>
+	
+	<div id="welcome">
+  
+  <%= yield %>
+</div>
+  <%= render "common/footer" %>
+</div>
+
+
+</body>
+</html>
